@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Conte o que está pensando!{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    <label for="title">Título</label>
+    <input 
+      type="text" 
+      name="title" 
+      id="title" 
+      value="{{ request.form['title'] }}" 
+      required 
+      autocomplete="off" 
+      placeholder="Digite o título da postagem"
+      aria-describedby="titleHelp"
+    >
+
+    <label for="body">Caixa de mensagem</label>
+    <textarea 
+      name="body" 
+      id="body" 
+      placeholder="Escreva o conteúdo da postagem aqui"
+      aria-describedby="bodyHelp"
+    >{{ request.form['body'] }}</textarea>
+
+    <input type="submit" value="Salvar" aria-label="Salvar nova postagem">
+  </form>
+{% endblock %}

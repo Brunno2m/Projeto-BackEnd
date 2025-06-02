@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Registre-se{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" novalidate>
+    <label for="username">Nome de usuário</label>
+    <input 
+      type="text" 
+      name="username" 
+      id="username" 
+      required 
+      autocomplete="username" 
+      placeholder="Escolha um nome de usuário" 
+      aria-describedby="usernameHelp"
+    >
+
+    <label for="password">Senha</label>
+    <input 
+      type="password" 
+      name="password" 
+      id="password" 
+      required 
+      autocomplete="new-password" 
+      placeholder="Crie uma senha segura"
+      aria-describedby="passwordHelp"
+    >
+
+    <input type="submit" value="Registrar" aria-label="Registrar novo usuário">
+  </form>
+{% endblock %}
