@@ -54,7 +54,23 @@ def mark_done(list_id, task_id):
     db = get_db()
     db.execute('UPDATE task SET done = 1 WHERE id = ?', (task_id,))
     db.commit()
-    flash('Tarefa marcada como feita.')
+    flash('Item concluido.')
+    return redirect(url_for('task.show_list', list_id=list_id))
+
+@bp.route('/<int:list_id>/undone/<int:task_id>', methods=('POST',))
+def mark_undone(list_id, task_id):
+    db = get_db()
+    db.execute('UPDATE task SET done = 0 WHERE id = ?', (task_id,))
+    db.commit()
+    flash('Item desmarcado.')
+    return redirect(url_for('task.show_list', list_id=list_id))
+
+@bp.route('/<int:list_id>/delete_task/<int:task_id>', methods=('POST',))
+def delete_task(list_id, task_id):
+    db = get_db()
+    db.execute('DELETE FROM task WHERE id = ?', (task_id,))
+    db.commit()
+    flash('Tarefa excluída com sucesso.')
     return redirect(url_for('task.show_list', list_id=list_id))
 
 @bp.route('/<int:list_id>/delete', methods=('POST',))

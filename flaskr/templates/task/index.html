@@ -9,7 +9,12 @@
     <li>
       <a href="{{ url_for('task.show_list', list_id=l.id) }}">{{ l.name }}</a>
       <form method="post" action="{{ url_for('task.delete_list', list_id=l.id) }}" style="display:inline;" onsubmit="return confirm('Confirma exclusão da lista {{ l.name }}?');">
-        <button type="submit" aria-label="Excluir lista {{ l.name }}">Excluir</button>
+        <button type="submit" aria-label="Excluir lista {{ l.name }}" title="Excluir lista {{ l.name }}" style="background:none; border:none; cursor:pointer; color:#c00; vertical-align: middle;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0V6H6v6.5a.5.5 0 0 1-1 0v-7z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1 0-2h3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1h3a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118z"/>
+          </svg>
+        </button>
       </form>
     </li>
   {% else %}
@@ -22,3 +27,4 @@
   <button type="submit">Criar Lista</button>
 </form>
 {% endblock %}
+

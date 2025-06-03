@@ -9,13 +9,34 @@
     <li>
       {% if t.done %}
         <s>{{ t.description }}</s>
+        <form method="post" action="{{ url_for('task.mark_undone', list_id=tasklist.id, task_id=t.id) }}" style="display:inline;">
+          <button type="submit" aria-label="Desmarcar tarefa" title="Desmarcar tarefa" style="background:none; border:none; cursor:pointer; color: #007bff; vertical-align: middle;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L6.707 7H14.5a.5.5 0 0 1 0 1H6.707l4.647 4.646a.5.5 0 0 1-.708.708l-5.5-5.5a.5.5 0 0 1 0-.708l5.5-5.5a.5.5 0 0 1 .708 0z"/>
+            </svg>
+          </button>
+        </form>
       {% else %}
         {{ t.description }}
         <form method="post" action="{{ url_for('task.mark_done', list_id=tasklist.id, task_id=t.id) }}" style="display:inline;">
-          <button type="submit">Marcar como feita</button>
+          <button type="submit" aria-label="Marcar como feita" title="Marcar como feita" style="background:none; border:none; cursor:pointer; color: green; vertical-align: middle;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+              <path d="M13.485 1.929a.75.75 0 0 1 1.06 1.06l-8.25 8.25a.75.75 0 0 1-1.06 0L1.454 7.54a.75.75 0 1 1 1.06-1.06l2.72 2.72 7.25-7.25z"/>
+            </svg>
+          </button>
         </form>
       {% endif %}
+      <form method="post" action="{{ url_for('task.delete_task', list_id=tasklist.id, task_id=t.id) }}" style="display:inline;" onsubmit="return confirm('Confirma exclusão da tarefa?');">
+        <button type="submit" aria-label="Excluir tarefa" title="Excluir tarefa" style="background:none; border:none; cursor:pointer; color: #c00; vertical-align: middle;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0V6H6v6.5a.5.5 0 0 1-1 0v-7z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1 0-2h3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1h3a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118z"/>
+          </svg>
+        </button>
+      </form>
     </li>
+  {% else %}
+    <li>Nenhuma tarefa criada ainda.</li>
   {% endfor %}
 </ul>
 <form method="post" action="{{ url_for('task.add_task', list_id=tasklist.id) }}">
