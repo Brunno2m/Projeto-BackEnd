@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tasklist.name }} - Tarefas{% endblock %}
+
+{% block content %}
+<h1>{{ tasklist.name }}</h1>
+<ul>
+  {% for t in tasks %}
+    <li>
+      {% if t.done %}
+        <s>{{ t.description }}</s>
+      {% else %}
+        {{ t.description }}
+        <form method="post" action="{{ url_for('task.mark_done', list_id=tasklist.id, task_id=t.id) }}" style="display:inline;">
+          <button type="submit">Marcar como feita</button>
+        </form>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+<form method="post" action="{{ url_for('task.add_task', list_id=tasklist.id) }}">
+  <input name="description" placeholder="Nova tarefa" required>
+  <button type="submit">Adicionar Tarefa</button>
+</form>
+<a href="{{ url_for('task.index') }}">Voltar</a>
+{% endblock %}

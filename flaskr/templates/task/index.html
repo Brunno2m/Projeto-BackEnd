@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Listas de Tarefas{% endblock %}
+
+{% block content %}
+<h1>Listas de Tarefas</h1>
+<ul>
+  {% for l in tasklists %}
+    <li><a href="{{ url_for('task.show_list', list_id=l.id) }}">{{ l.name }}</a></li>
+  {% endfor %}
+</ul>
+<form method="post" action="{{ url_for('task.add_list') }}">
+  <input name="name" placeholder="Nova lista" required>
+  <button type="submit">Criar Lista</button>
+</form>
+{% endblock %}

@@ -15,6 +15,8 @@
       {% if g.user %}
         <li><span aria-current="page">{{ g.user['username'] }}</span></li>
         <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+        <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
+        <li><a href="{{ url_for('task.index') }}">Tarefas</a></li>
       {% else %}
         <li><a href="{{ url_for('auth.register') }}">Registrar-se</a></li>
         <li><a href="{{ url_for('auth.login') }}">Entrar</a></li>
